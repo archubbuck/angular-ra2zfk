@@ -1,34 +1,16 @@
-export class DataSetColumn {
-  public id: string;
-  public displayName?: string = '';
+export class DataSet {
+  public columnsChosen: Array<ColumnIdentifier> = [];
+  constructor(
+    public name: string,
+    public columnOptions: Array<ColumnIdentifier>
+  ) {}
 }
 
-export type ColumnIdentifier =
-  | 'issuerName'
-  | 'recommendation'
-  | 'relativeValue'
-  | 'outlook';
+export const columnOptions = [
+  'issuerName',
+  'recommendation',
+  'relativeValue',
+  'outlook',
+] as const;
 
-export type DataSetColumn = {
-  id: ColumnIdentifier;
-  displayName?: string;
-};
-
-export const columns: Array<DataSetColumn> = [
-  {
-    id: 'issuerName',
-    displayName: 'Issuer Name',
-  },
-  {
-    id: 'recommendation',
-    displayName: 'Recommendation',
-  },
-  {
-    id: 'relativeValue',
-    displayName: 'Relative Value',
-  },
-  {
-    id: 'outlook',
-    displayName: 'Outlook',
-  },
-];
+export type ColumnOptions = keyof ColumnOptions[number];
