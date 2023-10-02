@@ -1,16 +1,13 @@
 export class DataSet {
-  public columnsChosen: Array<ColumnIdentifier> = [];
-  constructor(
-    public name: string,
-    public columnOptions: Array<ColumnIdentifier>
-  ) {}
+  public columnsChosen: Array<Column> = [];
+  constructor(public name: string, public columnOptions: Array<Column>) {}
 }
 
-export const columnOptions = [
+export const columns = [
   'issuerName',
   'recommendation',
   'relativeValue',
   'outlook',
 ] as const;
 
-export type ColumnOptions = keyof ColumnOptions[number];
+export type Column = typeof columns[number];
