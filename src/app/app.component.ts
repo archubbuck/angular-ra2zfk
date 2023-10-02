@@ -16,7 +16,7 @@ import { columns, DataSet } from './model';
                       [ngStyle]="{'margin-right': 0}"
                   ></kendo-avatar>
               </div>
-              <h1 kendoCardTitle>Issuers</h1>
+              <h1 kendoCardTitle [innerText]="dataSet.name"></h1>
               <div>
                   <kendo-avatar 
                       icon="home" 
@@ -30,44 +30,20 @@ import { columns, DataSet } from './model';
       </kendo-card-header>
       
       <kendo-card-body [ngStyle]="{'padding': 0}">
-      <kendo-grid
-        [kendoGridTemplateEditing]="addRow"
-        [rowReorderable]="true"
-        [kendoGridBinding]="selectedColumns"
-        [pageable]="true"
-        [sortable]="true"
-        [navigable]="true"
-        [hideHeader]="true"
-        scrollable="none"
-        [ngStyle]="{'border-width': 0}"
-      >
-      <kendo-grid-rowreorder-column [width]="40"></kendo-grid-rowreorder-column>
-      <kendo-grid-column>
-      <ng-template kendoGridCellTemplate let-dataItem let-column="column">
-          <kendo-dropdownlist
+      <kendo-dropdownlist
               kendoGridFocusable
-              [data]="selectableColumns"
-              [(ngModel)]="dataItem"
+              [data]="dataSet.columns"
           ></kendo-dropdownlist>
-      </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-command-column [width]="40">
-          <ng-template kendoGridCellTemplate>
-          <button kendoGridRemoveCommand fillMode="clear" icon="delete" type="button" size="medium"></button>
-          </ng-template>
-      </kendo-grid-command-column>
-      <ng-template kendoPagerTemplate>
-          <kendo-grid-spacer></kendo-grid-spacer>
-          <button kendoGridAddCommand fillMode="clear" type="button" icon="plus">
-              Add a column
-          </button>
-          <kendo-grid-spacer></kendo-grid-spacer>
-      </ng-template>
-    </kendo-grid>
       </kendo-card-body>
+
+      <kendo-card-footer class="k-hstack">
+        <kendo-button fillMode="clear" type="button" icon="plus">
+            Add a column
+        </kendo-button>
+      </kendo-card-footer>
   </kendo-card>
 </form>`,
 })
 export class AppComponent {
-  public dataSets: Array<DataSet> = [new DataSet('Test', [...columns])];
+  public dataSet: DataSet = new DataSet('Test', [...columns]);
 }
